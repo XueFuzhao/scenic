@@ -66,7 +66,7 @@ def get_dataset(*,
       a test_iter, and a dict of meta_data.
   """
   del rng
-  del dataset_configs
+  # del dataset_configs
   dtype = getattr(tf, dtype_str)
   preprocess_ex = functools.partial(preprocess_example, dtype=dtype)
 
@@ -75,8 +75,10 @@ def get_dataset(*,
       'mnist',
       batch_size,
       split='train',
+      data_dir=dataset_configs.data_dir,
       preprocess_example=preprocess_ex,
-      shuffle_seed=shuffle_seed)
+      shuffle_seed=shuffle_seed
+  )
 
   if dataset_service_address:
     if shuffle_seed is not None:
