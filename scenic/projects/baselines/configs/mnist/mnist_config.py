@@ -14,6 +14,8 @@ def get_config():
   # Dataset.
   config.dataset_name = 'mnist'
   config.dataset_configs = ml_collections.ConfigDict()
+  # Added by Fuzhao.
+  config.dataset_configs.data_dir = 'gs://fuzhao/mnist'
   config.data_dtype_str = 'float32'
 
   # Model.
