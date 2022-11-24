@@ -56,6 +56,7 @@ def get_config(runlocal=''):
   config.dataset_name = 'imagenet'
   config.data_dtype_str = 'float32'
   config.dataset_configs = ml_collections.ConfigDict()
+  config.dataset_configs.data_dir = 'gs://fuzhao/imagenet'
 
   # Model.
   version, patch = VARIANT.split('/')
