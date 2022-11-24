@@ -91,7 +91,10 @@ def get_dataset(*,
 
   logging.info('Loading test split of the MNIST dataset.')
   eval_ds, _ = dataset_utils.load_split_from_tfds(
-      'mnist', eval_batch_size, split='test', preprocess_example=preprocess_ex)
+      'mnist', eval_batch_size,
+      split='test', 
+      data_dir=dataset_configs.data_dir,
+      preprocess_example=preprocess_ex)
 
   maybe_pad_batches_train = functools.partial(
       dataset_utils.maybe_pad_batch, train=True, batch_size=batch_size)
