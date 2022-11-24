@@ -120,6 +120,7 @@ def get_dataset(*,
       'cifar10',
       batch_size,
       split='train',
+      data_dir=dataset_configs.data_dir,
       preprocess_example=preprocess_ex,
       augment_train_example=augment_ex,
       shuffle_seed=shuffle_seed)
@@ -138,6 +139,7 @@ def get_dataset(*,
       'cifar10',
       eval_batch_size,
       split='test',
+      data_dir=dataset_configs.data_dir,
       preprocess_example=preprocess_ex)
 
   maybe_pad_batches_train = functools.partial(
