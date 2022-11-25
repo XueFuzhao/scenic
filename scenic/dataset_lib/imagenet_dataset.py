@@ -213,7 +213,8 @@ def imagenet_load_split(batch_size,
                         image_size=IMAGE_SIZE,
                         prefetch_buffer_size=10,
                         shuffle_seed=None,
-                        data_augmentations=None):
+                        data_augmentations=None,
+                        data_dir=None):
   """Creates a split from the ImageNet dataset using TensorFlow Datasets.
 
   For the training set, we drop the last partial batch. This is fine to do
@@ -255,7 +256,7 @@ def imagenet_load_split(batch_size,
     label = tf.one_hot(label, NUM_CLASSES) if onehot_labels else label
     return {'inputs': image, 'label': label}
 
-  dataset_builder = tfds.builder('imagenet2012:5.*.*')
+  dataset_builder = tfds.builder('imagenet2012:5.*.*', data_dir=data_dir)
   # Download dataset:
   dataset_builder.download_and_prepare()
   ds = dataset_builder.as_dataset(
@@ -330,7 +331,8 @@ def get_dataset(*,
       onehot_labels=onehot_labels,
       dtype=dtype,
       shuffle_seed=shuffle_seed,
-      data_augmentations=data_augmentations)
+      data_augmentations=data_augmentations,
+      data_dir=dataset_configs.data_dir)
 
   if dataset_service_address:
     if shuffle_seed is not None:
@@ -343,7 +345,9 @@ def get_dataset(*,
 
   logging.info('Loading test split of the ImageNet dataset.')
   eval_ds = imagenet_load_split(eval_batch_size, train=False,
-                                onehot_labels=onehot_labels, dtype=dtype)
+                                onehot_labels=onehot_labels,
+                                dtype=dtype,
+                                data_dir=dataset_configs.data_dir)
 
   maybe_pad_batches_train = functools.partial(
       dataset_utils.maybe_pad_batch, train=True, batch_size=batch_size)
