@@ -26,6 +26,7 @@ def get_config(runlocal=''):
   config.data_dtype_str = 'float32'
   config.dataset_configs = ml_collections.ConfigDict()
   config.dataset_configs.dataset = 'imagenet2012'
+  config.dataset_configs.dataset_dir = 'gs://fuzhao/imagenet'
   config.dataset_configs.num_classes = NUM_CLASSES
   config.dataset_configs.train_split = 'train'
   config.dataset_configs.val_split = 'validation'
